@@ -7,5 +7,19 @@
     <string name="title_activity_pipe">PipeActivity</string>
     <string name="send_message">Send message</string>
     <string name="send_messages">Send messages</string>
+    <string name="chapter_1">Chapter1</string>
+    <string name="chapter_2">Chapter2</string>
+    <string name="chapter_3">Chapter3</string>
+    <string name="chapter_4">Chapter4</string>
+    <string name="chapter_5">Chapter5</string>
+    <string name="chapter_6">Chapter6</string>
+    <string name="chapter_7">Chapter7</string>
+    <string name="chapter_8">Chapter8</string>
+    <string name="chapter_9">Chapter9</string>
+    <string name="chapter_10">Chapter10</string>
+    <string name="chapter_11">Chapter11</string>
+    <string name="chapter_12">Chapter12</string>
+    <string name="chapter_13">Chapter13</string>
+    <string name="chapter_14">Chapter14</string>
 
 </resources>
