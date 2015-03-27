@@ -1,12 +1,23 @@
 package com.sarvex.efficient;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 
+import com.sarvex.efficient.chapter10.Chapter10Activity;
+import com.sarvex.efficient.chapter11.Chapter11Activity;
+import com.sarvex.efficient.chapter12.Chapter12Activity;
+import com.sarvex.efficient.chapter13.Chapter13Activity;
+import com.sarvex.efficient.chapter14.Chapter14Activity;
+import com.sarvex.efficient.chapter4.Chapter4Activity;
+import com.sarvex.efficient.chapter5.Chapter5Activity;
+import com.sarvex.efficient.chapter6.Chapter6Activity;
+import com.sarvex.efficient.chapter7.Chapter7Activity;
+import com.sarvex.efficient.chapter8.Chapter8Activity;
+import com.sarvex.efficient.chapter9.Chapter9Activity;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,26 +25,59 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void onChapter1(View v) {
+        // Empty, no examples in this chapter.
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void onChapter2(View v) {
+        // Empty, no examples in this chapter.
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+    public void onChapter3(View v) {
+        // Empty, no examples in this chapter.
+    }
 
-        return super.onOptionsItemSelected(item);
+    public void onChapter4(View v) {
+        startActivity(new Intent(this, Chapter4Activity.class));
+    }
+
+    public void onChapter5(View v) {
+        startActivity(new Intent(this, Chapter5Activity.class));
+    }
+
+    public void onChapter6(View v) {
+        startActivity(new Intent(this, Chapter6Activity.class));
+    }
+
+    public void onChapter7(View v) {
+        startActivity(new Intent(this, Chapter7Activity.class));
+    }
+
+    public void onChapter8(View v) {
+        startActivity(new Intent(this, Chapter8Activity.class));
+    }
+
+    public void onChapter9(View v) {
+        startActivity(new Intent(this, Chapter9Activity.class));
+    }
+
+    public void onChapter10(View v) {
+        startActivity(new Intent(this, Chapter10Activity.class));
+    }
+
+    public void onChapter11(View v) {
+        startActivity(new Intent(this, Chapter11Activity.class));
+    }
+
+    public void onChapter12(View v) {
+        startActivity(new Intent(this, Chapter12Activity.class));
+    }
+
+    public void onChapter13(View v) {
+        startActivity(new Intent(this, Chapter13Activity.class));
+    }
+
+    public void onChapter14(View v) {
+        startActivity(new Intent(this, Chapter14Activity.class));
     }
 }
