@@ -14,7 +14,7 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 
 /**

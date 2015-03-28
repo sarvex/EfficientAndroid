@@ -8,7 +8,7 @@ import android.os.Handler;
 import android.os.ResultReceiver;
 import android.view.View;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 public class WebServiceActivity extends Activity {
 
@@ -26,11 +26,10 @@ public class WebServiceActivity extends Activity {
                 String jsonResult = null;
                 if (httpStatus == 200) { // OK
                     if (resultData != null) {
-                        jsonResult= resultData.getString(WebService.BUNDLE_KEY_REQUEST_RESULT);
+                        jsonResult = resultData.getString(WebService.BUNDLE_KEY_REQUEST_RESULT);
                         // Omitted: Handle response
                     }
-                }
-                else {
+                } else {
                     // Handle error
                 }
             }

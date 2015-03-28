@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class TaskTrackingThreadPool extends ThreadPoolExecutor{
+public class TaskTrackingThreadPool extends ThreadPoolExecutor {
 
     private static final String TAG = "CustomThreadPool";
 

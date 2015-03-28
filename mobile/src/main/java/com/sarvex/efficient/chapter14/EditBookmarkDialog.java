@@ -8,19 +8,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 public class EditBookmarkDialog extends DialogFragment {
-
-    static EditBookmarkDialog newInstance(ChromeBookmarkActivity.ChromeBookmarkAsyncHandler asyncQueryHandler) {
-        EditBookmarkDialog dialog = new EditBookmarkDialog(asyncQueryHandler);
-        return dialog;
-    }
 
     ChromeBookmarkActivity.ChromeBookmarkAsyncHandler mAsyncQueryHandler;
 
     public EditBookmarkDialog(ChromeBookmarkActivity.ChromeBookmarkAsyncHandler asyncQueryHandler) {
         mAsyncQueryHandler = asyncQueryHandler;
+    }
+
+    static EditBookmarkDialog newInstance(ChromeBookmarkActivity.ChromeBookmarkAsyncHandler asyncQueryHandler) {
+        EditBookmarkDialog dialog = new EditBookmarkDialog(asyncQueryHandler);
+        return dialog;
     }
 
     @Override

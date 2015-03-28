@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
-public class BasicActivity extends Activity implements LoaderManager.LoaderCallbacks<Integer>{
+public class BasicActivity extends Activity implements LoaderManager.LoaderCallbacks<Integer> {
 
     private static final int BASIC_LOADER_ID = 0;
 

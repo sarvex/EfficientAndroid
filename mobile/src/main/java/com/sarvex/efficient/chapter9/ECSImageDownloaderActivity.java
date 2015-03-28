@@ -8,7 +8,7 @@ import android.os.SystemClock;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 import java.util.Random;
 import java.util.concurrent.Callable;
@@ -26,6 +26,31 @@ public class ECSImageDownloaderActivity extends Activity {
 
     private LinearLayout layoutImages;
 
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ecs_image_downloader);
+        layoutImages = (LinearLayout) findViewById(R.id.layout_images);
+
+        DownloadCompletionService ecs = new DownloadCompletionService(Executors.newCachedThreadPool());
+        new ConsumerThread(ecs).start();
+
+        for (int i = 0; i < 5; i++) {
+            ecs.submit(new ImageDownloadTask());
+        }
+
+        ecs.shutdown();
+    }
+
+    private void addImage(final Bitmap image) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ImageView iv = new ImageView(ECSImageDownloaderActivity.this);
+                iv.setImageBitmap(image);
+                layoutImages.addView(iv);
+            }
+        });
+    }
 
     private class ImageDownloadTask implements Callable<Bitmap> {
 
@@ -70,7 +95,7 @@ public class ECSImageDownloaderActivity extends Activity {
         public void run() {
             super.run();
             try {
-                while(!mEcs.isTerminated()) {
+                while (!mEcs.isTerminated()) {
                     Future<Bitmap> future = mEcs.poll(1, TimeUnit.SECONDS);
                     if (future != null) {
                         addImage(future.get());
@@ -82,32 +107,5 @@ public class ECSImageDownloaderActivity extends Activity {
                 e.printStackTrace();
             }
         }
-    }
-
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ecs_image_downloader);
-        layoutImages = (LinearLayout) findViewById(R.id.layout_images);
-
-        DownloadCompletionService ecs = new DownloadCompletionService(Executors.newCachedThreadPool());
-        new ConsumerThread(ecs).start();
-
-        for (int i = 0; i < 5; i++) {
-            ecs.submit(new ImageDownloadTask());
-        }
-
-        ecs.shutdown();
-    }
-
-
-    private void addImage(final Bitmap image) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                ImageView iv = new ImageView(ECSImageDownloaderActivity.this);
-                iv.setImageBitmap(image);
-                layoutImages.addView(iv);
-            }
-        });
     }
 }

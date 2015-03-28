@@ -6,35 +6,10 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.TextView;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 
 public class ThreadRetainActivity extends Activity {
-
-    private static class MyThread extends Thread {
-        private ThreadRetainActivity mActivity;
-
-        public MyThread(ThreadRetainActivity activity) {
-            mActivity = activity;
-        }
-
-        private void attach(ThreadRetainActivity activity) {
-            mActivity = activity;
-        }
-
-        @Override
-        public void run() {
-            final String text = getTextFromNetwork();
-            mActivity.setText(text);
-        }
-
-        // Long operation
-        private String getTextFromNetwork() {
-            // Simulate network operation
-            SystemClock.sleep(5000);
-            return "Text from network";
-        }
-    }
 
     private static MyThread t;
     private TextView textView;
@@ -72,5 +47,30 @@ public class ThreadRetainActivity extends Activity {
                 textView.setText(text);
             }
         });
+    }
+
+    private static class MyThread extends Thread {
+        private ThreadRetainActivity mActivity;
+
+        public MyThread(ThreadRetainActivity activity) {
+            mActivity = activity;
+        }
+
+        private void attach(ThreadRetainActivity activity) {
+            mActivity = activity;
+        }
+
+        @Override
+        public void run() {
+            final String text = getTextFromNetwork();
+            mActivity.setText(text);
+        }
+
+        // Long operation
+        private String getTextFromNetwork() {
+            // Simulate network operation
+            SystemClock.sleep(5000);
+            return "Text from network";
+        }
     }
 }

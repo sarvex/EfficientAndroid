@@ -20,24 +20,6 @@ import java.util.List;
 public class FileLoader extends AsyncTaskLoader<List<String>> {
     // Cache the list of file names.
     private List<String> mFileNames;
-
-
-    // 1. Data observation
-    private class SdCardObserver extends FileObserver {
-
-        public SdCardObserver(String path) {
-            super(path, FileObserver.CREATE|FileObserver.DELETE);
-        }
-
-        @Override
-        public void onEvent(int event, String path) {
-            // Report that a content change has occurred.
-            // This call will force a new asynchronous data load if the loader is started
-            // otherwise it will keep a reference that the data has changed for future loads.
-            onContentChanged();
-        }
-    }
-
     private SdCardObserver mSdCardObserver;
 
     public FileLoader(Context context) {
@@ -45,8 +27,6 @@ public class FileLoader extends AsyncTaskLoader<List<String>> {
         String path = context.getFilesDir().getPath();
         mSdCardObserver = new SdCardObserver(path);
     }
-
-
 
     /**
      * Decide whether a load should be initiated or not.
@@ -103,6 +83,22 @@ public class FileLoader extends AsyncTaskLoader<List<String>> {
     }
 
     private void clearResources() {
-       mFileNames = null;
+        mFileNames = null;
+    }
+
+    // 1. Data observation
+    private class SdCardObserver extends FileObserver {
+
+        public SdCardObserver(String path) {
+            super(path, FileObserver.CREATE | FileObserver.DELETE);
+        }
+
+        @Override
+        public void onEvent(int event, String path) {
+            // Report that a content change has occurred.
+            // This call will force a new asynchronous data load if the loader is started
+            // otherwise it will keep a reference that the data has changed for future loads.
+            onContentChanged();
+        }
     }
 }

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -88,7 +88,7 @@ public class FileDownloadActivity extends Activity {
         @Override
         protected void onProgressUpdate(Bitmap... bitmaps) {
             super.onProgressUpdate(bitmaps);
-            if (mActivity != null)  {
+            if (mActivity != null) {
                 mActivity.mProgressBar.setProgress(++mCount);
                 ImageView iv = new ImageView(mActivity);
                 iv.setImageBitmap(bitmaps[0]);

@@ -31,6 +31,35 @@ public class ChainedNetworkActivity extends Activity {
             }
         }
     };
+    private NetworkHandlerThread mThread;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mThread = new NetworkHandlerThread();
+        mThread.start();
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        Dialog dialog = null;
+        switch (id) {
+            case DIALOG_LOADING:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Loading...");
+                dialog = builder.create();
+                break;
+        }
+        return dialog;
+    }
+
+    /**
+     * Ensure that the background thread is terminated with the Activity.
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mThread.quit();
+    }
 
     private class NetworkHandlerThread extends HandlerThread {
         private static final int STATE_A = 1;
@@ -84,36 +113,5 @@ public class ChainedNetworkActivity extends Activity {
         public void fetchDataFromNetwork() {
             mHandler.sendEmptyMessage(STATE_A);
         }
-    }
-
-    private NetworkHandlerThread mThread;
-
-
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mThread = new NetworkHandlerThread();
-        mThread.start();
-    }
-
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        Dialog dialog = null;
-        switch (id) {
-            case DIALOG_LOADING:
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Loading...");
-            dialog = builder.create();
-            break;
-        }
-        return dialog;
-    }
-
-    /**
-     * Ensure that the background thread is terminated with the Activity.
-     */
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mThread.quit();
     }
 }

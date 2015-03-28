@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 import java.util.Random;
 
@@ -20,8 +20,21 @@ public class HandlerExampleActivity extends Activity {
 
     private final static int SHOW_PROGRESS_BAR = 1;
     private final static int HIDE_PROGRESS_BAR = 0;
-    private BackgroundThread mBackgroundThread;
+    private final Handler mUiHandler = new Handler() {
+        public void handleMessage(Message msg) {
 
+            switch (msg.what) {
+                case SHOW_PROGRESS_BAR:
+                    mProgressBar.setVisibility(View.VISIBLE);
+                    break;
+                case HIDE_PROGRESS_BAR:
+                    mText.setText(String.valueOf(msg.arg1));
+                    mProgressBar.setVisibility(View.INVISIBLE);
+                    break;
+            }
+        }
+    };
+    private BackgroundThread mBackgroundThread;
     private TextView mText;
     private Button mButton;
     private ProgressBar mProgressBar;
@@ -50,21 +63,6 @@ public class HandlerExampleActivity extends Activity {
         super.onDestroy();
         mBackgroundThread.exit();
     }
-
-    private final Handler mUiHandler = new Handler() {
-        public void handleMessage(Message msg) {
-
-            switch(msg.what) {
-                case SHOW_PROGRESS_BAR:
-                    mProgressBar.setVisibility(View.VISIBLE);
-                    break;
-                case HIDE_PROGRESS_BAR:
-                    mText.setText(String.valueOf(msg.arg1));
-                    mProgressBar.setVisibility(View.INVISIBLE);
-                    break;
-            }
-        }
-    };
 
     private class BackgroundThread extends Thread {
 

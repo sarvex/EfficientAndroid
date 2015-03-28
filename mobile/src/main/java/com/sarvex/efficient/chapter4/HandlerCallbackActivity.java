@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 
 public class HandlerCallbackActivity extends Activity implements Handler.Callback {

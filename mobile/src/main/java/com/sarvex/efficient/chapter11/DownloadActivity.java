@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 
 public class DownloadActivity extends Activity {

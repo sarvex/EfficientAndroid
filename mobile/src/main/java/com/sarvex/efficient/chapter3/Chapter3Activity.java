@@ -3,7 +3,7 @@ package com.sarvex.efficient.chapter3;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 public class Chapter3Activity extends Activity {
 

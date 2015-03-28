@@ -6,7 +6,8 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import com.eat.R;
+
+import com.sarvex.efficient.R;
 
 
 public class ThreadRetainWithFragmentActivity extends Activity {
@@ -45,7 +46,7 @@ public class ThreadRetainWithFragmentActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(KEY_TEXT, (String)mTextView.getText());
+        outState.putString(KEY_TEXT, (String) mTextView.getText());
     }
 
     // Method called to start a worker thread

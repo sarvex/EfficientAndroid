@@ -7,33 +7,12 @@ import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 
 public class LooperActivity extends Activity {
 
     LooperThread mLooperThread;
-
-    private static class LooperThread extends Thread {
-
-        public Handler mHandler;
-
-        public void run() {
-            Looper.prepare();
-            mHandler = new Handler() {
-                public void handleMessage(Message msg) {
-                    if(msg.what == 0) {
-                        doLongRunningOperation();
-                    }
-                }
-            };
-            Looper.loop();
-        }
-
-        private void doLongRunningOperation() {
-            // Add long running operation here.
-        }
-    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,5 +31,26 @@ public class LooperActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         mLooperThread.mHandler.getLooper().quit();
+    }
+
+    private static class LooperThread extends Thread {
+
+        public Handler mHandler;
+
+        public void run() {
+            Looper.prepare();
+            mHandler = new Handler() {
+                public void handleMessage(Message msg) {
+                    if (msg.what == 0) {
+                        doLongRunningOperation();
+                    }
+                }
+            };
+            Looper.loop();
+        }
+
+        private void doLongRunningOperation() {
+            // Add long running operation here.
+        }
     }
 }

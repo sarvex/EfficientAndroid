@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileListFragment extends ListFragment implements
-        LoaderManager.LoaderCallbacks<List<String>>{
+        LoaderManager.LoaderCallbacks<List<String>> {
 
     private static final int FILE_LOADER_ID = 1;
 

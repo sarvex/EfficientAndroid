@@ -1,7 +1,15 @@
 package com.sarvex.efficient.chapter14;
 
-import android.app.*;
-import android.content.*;
+import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.app.LoaderManager;
+import android.content.AsyncQueryHandler;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,43 +19,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 public class ChromeBookmarkActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor> {
-
-    // Definition of bookmark access information.
-    public interface ChromeBookmark {
-        final static int ID = 1;
-        final static Uri URI= Uri.parse("content://com.android.chrome.browser/bookmarks");
-        final static String[] PROJECTION = {
-                Browser.BookmarkColumns._ID,
-                Browser.BookmarkColumns.TITLE,
-                Browser.BookmarkColumns.URL
-        };
-    }
-
-    // AsyncQueryHandler with convenience methods for insertion and deletion of bookmarks.
-    public static class ChromeBookmarkAsyncHandler extends AsyncQueryHandler {
-
-        public ChromeBookmarkAsyncHandler(ContentResolver cr) {
-            super(cr);
-        }
-
-        public void insert(String name, String url) {
-            ContentValues cv = new ContentValues();
-            cv.put(Browser.BookmarkColumns.BOOKMARK, 1);
-            cv.put(Browser.BookmarkColumns.TITLE, name);
-            cv.put(Browser.BookmarkColumns.URL, url);
-            startInsert(0, null, ChromeBookmark.URI, cv);
-        }
-
-        public void delete(String name) {
-            String where = Browser.BookmarkColumns.TITLE + "=?";
-            String[] args = new String[] { name };
-            startDelete(0, null, ChromeBookmark.URI, where, args);
-        }
-    }
-
 
     ListView mListBookmarks;
     SimpleCursorAdapter mAdapter;
@@ -68,8 +42,8 @@ public class ChromeBookmarkActivity extends Activity implements LoaderManager.Lo
     private void initAdapter() {
         mAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_1, null,
-                new String[] { Browser.BookmarkColumns.TITLE },
-                new int[] { android.R.id.text1}, 0);
+                new String[]{Browser.BookmarkColumns.TITLE},
+                new int[]{android.R.id.text1}, 0);
         mListBookmarks.setAdapter(mAdapter);
         mListBookmarks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -100,7 +74,6 @@ public class ChromeBookmarkActivity extends Activity implements LoaderManager.Lo
         mAdapter.swapCursor(null);
     }
 
-
     public void onAddBookmark(View v) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Fragment prev = getFragmentManager().findFragmentByTag("dialog");
@@ -112,5 +85,38 @@ public class ChromeBookmarkActivity extends Activity implements LoaderManager.Lo
         // Create and show the dialog.
         DialogFragment newFragment = EditBookmarkDialog.newInstance(mChromeBookmarkAsyncHandler);
         newFragment.show(ft, "dialog");
+    }
+
+    // Definition of bookmark access information.
+    public interface ChromeBookmark {
+        final static int ID = 1;
+        final static Uri URI = Uri.parse("content://com.android.chrome.browser/bookmarks");
+        final static String[] PROJECTION = {
+                Browser.BookmarkColumns._ID,
+                Browser.BookmarkColumns.TITLE,
+                Browser.BookmarkColumns.URL
+        };
+    }
+
+    // AsyncQueryHandler with convenience methods for insertion and deletion of bookmarks.
+    public static class ChromeBookmarkAsyncHandler extends AsyncQueryHandler {
+
+        public ChromeBookmarkAsyncHandler(ContentResolver cr) {
+            super(cr);
+        }
+
+        public void insert(String name, String url) {
+            ContentValues cv = new ContentValues();
+            cv.put(Browser.BookmarkColumns.BOOKMARK, 1);
+            cv.put(Browser.BookmarkColumns.TITLE, name);
+            cv.put(Browser.BookmarkColumns.URL, url);
+            startInsert(0, null, ChromeBookmark.URI, cv);
+        }
+
+        public void delete(String name) {
+            String where = Browser.BookmarkColumns.TITLE + "=?";
+            String[] args = new String[]{name};
+            startDelete(0, null, ChromeBookmark.URI, where, args);
+        }
     }
 }

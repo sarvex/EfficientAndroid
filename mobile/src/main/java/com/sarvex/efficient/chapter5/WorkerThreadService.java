@@ -28,7 +28,7 @@ public class WorkerThreadService extends Service {
     private void onWorkerPrepared() {
         Log.d(TAG, "onWorkerPrepared");
         mWorkerMessenger = new Messenger(mWorkerThread.mWorkerHandler);
-        synchronized(this) {
+        synchronized (this) {
             notifyAll();
         }
     }

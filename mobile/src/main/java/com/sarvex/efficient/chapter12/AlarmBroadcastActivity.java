@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.widget.TextView;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 
 public class AlarmBroadcastActivity extends Activity {
@@ -31,9 +31,9 @@ public class AlarmBroadcastActivity extends Activity {
         registerReceiver(alarmReceiver, new IntentFilter("com.eat.alarmreceiver"));
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent("com.eat.alarmreceiver"), PendingIntent.FLAG_UPDATE_CURRENT);
-        am = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
+        am = (AlarmManager) (this.getSystemService(Context.ALARM_SERVICE));
         am.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime()
-         + ONE_HOUR, ONE_HOUR, pendingIntent);
+                + ONE_HOUR, ONE_HOUR, pendingIntent);
         tvStatus.setText("Alarm is set");
     }
 

@@ -9,7 +9,7 @@ import android.util.Log;
 import android.util.LogPrinter;
 import android.view.View;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 
 public class MQDebugActivity extends Activity {

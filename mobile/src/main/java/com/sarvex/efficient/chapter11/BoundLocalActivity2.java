@@ -10,7 +10,7 @@ import android.os.IBinder;
 import android.view.View;
 import android.widget.TextView;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 import java.lang.ref.WeakReference;
 
@@ -22,28 +22,6 @@ public class BoundLocalActivity2 extends Activity {
     private LocalServiceConnection mLocalServiceConnection = new LocalServiceConnection();
     private boolean mIsBound;
     private BoundLocalService2 mBoundLocalService;
-
-    private static class ServiceListener implements BoundLocalService2.OperationListener {
-
-        private WeakReference<BoundLocalActivity2> mWeakActivity;
-
-        public ServiceListener(BoundLocalActivity2 activity) {
-            this.mWeakActivity = new WeakReference<BoundLocalActivity2>(activity);
-        }
-
-        @Override
-        public void onOperationDone(final int someResult) {
-            final BoundLocalActivity2 localReferenceActivity = mWeakActivity.get();
-            if (localReferenceActivity != null) {
-                localReferenceActivity.runOnUiThread(new Runnable(){
-                    @Override
-                    public void run() {
-                         localReferenceActivity.tvStatus.setText(Integer.toString(someResult));
-                    }
-                });
-            }
-        }
-    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +45,31 @@ public class BoundLocalActivity2 extends Activity {
         }
     }
 
-
     public void onClickExecuteOnClientUIThread(View v) {
         if (mBoundLocalService != null) {
             mBoundLocalService.doLongAsyncOperation(new ServiceListener(this));
+        }
+    }
+
+    private static class ServiceListener implements BoundLocalService2.OperationListener {
+
+        private WeakReference<BoundLocalActivity2> mWeakActivity;
+
+        public ServiceListener(BoundLocalActivity2 activity) {
+            this.mWeakActivity = new WeakReference<BoundLocalActivity2>(activity);
+        }
+
+        @Override
+        public void onOperationDone(final int someResult) {
+            final BoundLocalActivity2 localReferenceActivity = mWeakActivity.get();
+            if (localReferenceActivity != null) {
+                localReferenceActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        localReferenceActivity.tvStatus.setText(Integer.toString(someResult));
+                    }
+                });
+            }
         }
     }
 
@@ -78,7 +77,7 @@ public class BoundLocalActivity2 extends Activity {
 
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            mBoundLocalService = ((BoundLocalService2.ServiceBinder)iBinder).getService();
+            mBoundLocalService = ((BoundLocalService2.ServiceBinder) iBinder).getService();
         }
 
         @Override

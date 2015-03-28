@@ -8,8 +8,6 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 
-import com.eat.R;
-
 
 public class BoundLocalActivity extends Activity {
 
@@ -24,8 +22,10 @@ public class BoundLocalActivity extends Activity {
                 Service.BIND_AUTO_CREATE);
         mIsBound = true;
     }
+
     @Override
-    protected void onDestroy() { super.onDestroy();
+    protected void onDestroy() {
+        super.onDestroy();
         if (mIsBound) {
             try {
                 unbindService(mLocalServiceConnection);
@@ -35,10 +35,11 @@ public class BoundLocalActivity extends Activity {
             }
         }
     }
+
     private class LocalServiceConnection implements ServiceConnection {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            mBoundLocalService = ((BoundLocalService.ServiceBinder)iBinder).getService();
+            mBoundLocalService = ((BoundLocalService.ServiceBinder) iBinder).getService();
 
             // At this point clients can invoke methods in the Service,
             // i.e. publishedMethod1 and publishedMethod2.

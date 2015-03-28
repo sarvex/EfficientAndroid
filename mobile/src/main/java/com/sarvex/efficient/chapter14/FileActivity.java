@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -31,7 +31,7 @@ public class FileActivity extends Activity {
             out = new BufferedOutputStream(new FileOutputStream(file));
             out.write(new String("Test").getBytes("UTF-8"));
             out.close();
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
         Log.d(TAG, "onAddFile - path = " + file.getAbsolutePath());

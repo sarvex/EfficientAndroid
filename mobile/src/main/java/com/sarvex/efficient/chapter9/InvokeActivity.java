@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 
 public class InvokeActivity extends Activity {
-
 
     private static final String TAG = "InvokeActivity";
 
@@ -52,7 +51,7 @@ public class InvokeActivity extends Activity {
                     }
                 });
 
-                ThreadPoolExecutor executor = (ThreadPoolExecutor)Executors.newFixedThreadPool(2);
+                ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
                 try {
                     Log.d(TAG, "invokeAll");
                     List<Future<String>> futures = executor.invokeAll(tasks);

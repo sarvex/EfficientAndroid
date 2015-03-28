@@ -6,7 +6,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 
 public class NetworkCheckerIntentService extends IntentService {

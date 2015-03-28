@@ -10,22 +10,6 @@ public class ThreadFragment extends Fragment {
     private ThreadRetainWithFragmentActivity mActivity;
     private MyThread t;
 
-    private class MyThread extends Thread {
-
-        @Override
-        public void run() {
-            final String text = getTextFromNetwork();
-            mActivity.setText(text);
-        }
-
-        // Long operation
-        private String getTextFromNetwork() {
-            // Simulate network operation
-            SystemClock.sleep(5000);
-            return "Text from network";
-        }
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,5 +31,21 @@ public class ThreadFragment extends Fragment {
     public void execute() {
         t = new MyThread();
         t.start();
+    }
+
+    private class MyThread extends Thread {
+
+        @Override
+        public void run() {
+            final String text = getTextFromNetwork();
+            mActivity.setText(text);
+        }
+
+        // Long operation
+        private String getTextFromNetwork() {
+            // Simulate network operation
+            SystemClock.sleep(5000);
+            return "Text from network";
+        }
     }
 }

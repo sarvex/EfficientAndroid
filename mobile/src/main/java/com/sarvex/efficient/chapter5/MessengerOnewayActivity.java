@@ -12,7 +12,7 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.view.View;
 
-import com.eat.R;
+import com.sarvex.efficient.R;
 
 
 /**

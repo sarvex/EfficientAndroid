@@ -1,28 +1,25 @@
 package com.sarvex.efficient.chapter4;
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.text.Editable;
-
-
-        import android.app.Activity;
-        import android.os.Bundle;
-        import android.text.TextWatcher;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
-        import com.eat.R;
 
-        import java.io.IOException;
-        import java.io.PipedReader;
-        import java.io.PipedWriter;
+import com.sarvex.efficient.R;
+
+import java.io.IOException;
+import java.io.PipedReader;
+import java.io.PipedWriter;
 
 
 public class PipeExampleActivity extends Activity {
 
     private static final String TAG = "PipeExampleActivity";
-    private EditText editText;
-
     PipedReader r;
     PipedWriter w;
-
+    private EditText editText;
     private Thread workerThread;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +45,7 @@ public class PipeExampleActivity extends Activity {
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 try {
                     // Only handle addition of characters
-                    if(count > before) {
+                    if (count > before) {
                         // Write the last entered character to the pipe
                         w.write(charSequence.subSequence(before, count).toString());
                     }
@@ -80,15 +77,16 @@ public class PipeExampleActivity extends Activity {
     private static class TextHandlerTask implements Runnable {
         private final PipedReader reader;
 
-        public TextHandlerTask(PipedReader reader){
+        public TextHandlerTask(PipedReader reader) {
             this.reader = reader;
         }
+
         @Override
         public void run() {
-            while(!Thread.currentThread().isInterrupted()){
+            while (!Thread.currentThread().isInterrupted()) {
                 try {
                     int i;
-                    while((i = reader.read()) != -1){
+                    while ((i = reader.read()) != -1) {
                         char c = (char) i;
                         //ADD TEXT PROCESSING LOGIC HERE
                         Log.d(TAG, "char = " + c);
