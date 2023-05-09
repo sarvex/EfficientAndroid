@@ -32,7 +32,7 @@ dependencies {
     compile 'com.googlecode.android-query:android-query:0.25.9'
 
     compile 'org.roboguice:roboguice:3.0.1'
-    provided 'org.roboguice:roboblender:3.0.1'
+    provided 'org.roboguice:roboblender:4.0.0'
 
     testCompile 'junit:junit:4.13.2'
     testCompile 'org.robolectric:robolectric:2.4'
